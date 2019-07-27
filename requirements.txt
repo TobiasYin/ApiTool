@@ -1,0 +1,6 @@
+Django
+django-cors-headers
+pip
+pytz
+setuptools
+sqlparse
