@@ -86,7 +86,7 @@ def change_api(request: HttpRequest) -> HttpResponse:
 
 def get_apis(request: HttpRequest) -> HttpResponse:
     param = request.GET.get("q")
-    d = Api.objects.all()
+    d = Api.objects.all().order_by("-id")
 
     def api_to_dict(api: Api):
         d = {}
@@ -123,7 +123,7 @@ def get_apis(request: HttpRequest) -> HttpResponse:
 
 def delete_api(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        post = json.loads(str(request.body, encoding = "utf-8"))
+        post = json.loads(str(request.body, encoding="utf-8"))
         api_id = post["id"]
         apis = Api.objects.filter(id=api_id)
         apis.delete()
