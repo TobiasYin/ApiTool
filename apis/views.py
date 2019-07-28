@@ -9,7 +9,7 @@ from apis.models import Api, Send, Receive
 
 def add_api(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        post = json.loads(request.body)
+        post = json.loads(str(request.body, encoding="utf-8"))
         title = post["title"]
         api_url = post["url"]
         if Api.objects.filter(url=api_url):
@@ -42,7 +42,7 @@ def add_api(request: HttpRequest) -> HttpResponse:
 
 def change_api(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        post = json.loads(request.body)
+        post = json.loads(str(request.body, encoding="utf-8"))
         title = post["title"]
         api_url = post["url"]
         api_id = post["id"]
@@ -123,7 +123,7 @@ def get_apis(request: HttpRequest) -> HttpResponse:
 
 def delete_api(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        post = json.loads(request.body)
+        post = json.loads(str(request.body, encoding = "utf-8"))
         api_id = post["id"]
         apis = Api.objects.filter(id=api_id)
         apis.delete()
