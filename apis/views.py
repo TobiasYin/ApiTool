@@ -116,7 +116,8 @@ def get_apis(request: HttpRequest) -> HttpResponse:
 
     res = []
     for i in d:
-        if (param and (i.url.find(param) != -1 or i.title.find(param) != -1)) or (not param):
+        if (param and (i.url.find(param) != -1 or i.title.find(param) != -1 or i.description.find(param) != -1)) or (
+                not param):
             res.append(api_to_dict(i))
     return HttpResponse(json.dumps(res), content_type="application/json")
 
