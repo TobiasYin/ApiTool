@@ -151,7 +151,7 @@ def output_apis(request):
     res = ""
     for i in d:
         res += api_to_block(i)
-        res += "\n\n"
+        res += "\n\n---\n\n"
     return HttpResponse(res.encode("utf-8"), content_type="text/plain", charset="utf-8")
 
 
