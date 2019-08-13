@@ -19,7 +19,7 @@ from django.urls import path
 from django.views.static import serve
 
 # from api_initial.settings import STATIC_ROOT
-from apis.views import get_apis, add_api, change_api, delete_api, index
+from apis.views import get_apis, add_api, change_api, delete_api, index, output_apis
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,5 @@ urlpatterns = [
     path("change/", change_api),
     path("delete/", delete_api),
     path("", index),
+    path("data.mp", output_apis)
 ]
