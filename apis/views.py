@@ -132,17 +132,17 @@ def output_apis(request):
         d += "method: " + api.types + "\n\n"
         d += "login_require: " + str(api.login_require) + "\n\n"
         d += "description: \n"
-        d += "\n" + "\n\t".join(api.description.split("\n"))
+        d += "\n" + "\n    ".join(api.description.split("\n"))
         sends = Send.objects.filter(api=api)
         d += "\n"
         d += "send: \n\n"
         for i in sends:
-            d += '\t'
+            d += '    '
             d += i.name + ": " + i.types
             d += "\n\n"
         receives = Receive.objects.filter(api=api)
         for i in receives:
-            d += '\t'
+            d += '    '
             d += i.name + ": " + i.types
             d += "\n\n"
         return d
