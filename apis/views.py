@@ -151,7 +151,7 @@ def output_apis(request):
     for i in d:
         res += api_to_block(i)
         res += "\n\n"
-    return HttpResponse(res, content_type="text/plain", charset="utf-8")
+    return HttpResponse(res.encode("utf-8"), content_type="text/plain", charset="utf-8")
 
 
 def delete_api(request: HttpRequest) -> HttpResponse:
