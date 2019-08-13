@@ -135,16 +135,17 @@ def output_apis(request):
         d += "\n" + "\n    ".join(api.description.split("\n"))
         sends = Send.objects.filter(api=api)
         d += "\n"
-        d += "send: \n\n"
+        d += "send: \n"
         for i in sends:
             d += '    '
             d += i.name + ": " + i.types
-            d += "\n\n"
+            d += "\n"
         receives = Receive.objects.filter(api=api)
+        d += "receive: \n"
         for i in receives:
             d += '    '
             d += i.name + ": " + i.types
-            d += "\n\n"
+            d += "\n"
         return d
 
     res = ""
