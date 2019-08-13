@@ -122,6 +122,38 @@ def get_apis(request: HttpRequest) -> HttpResponse:
     return HttpResponse(json.dumps(res), content_type="application/json")
 
 
+def output_apis(request):
+    d = Api.objects.all().order_by("id")
+
+    def api_to_block(api: Api):
+        d = ''
+        d += "### " + api.title + "\n"
+        d += "url: **" + api.url + "**\n\n"
+        d += "method: " + api.types + "\n\n"
+        d += "login_require: " + str(api.login_require) + "\n\n"
+        d += "description: \n"
+        d += "\n" + "\n\t".join(api.description.split("\n"))
+        sends = Send.objects.filter(api=api)
+        d += "\n"
+        d += "send: \n\n"
+        for i in sends:
+            d += '\t'
+            d += i.name + ": " + i.types
+            d += "\n\n"
+        receives = Receive.objects.filter(api=api)
+        for i in receives:
+            d += '\t'
+            d += i.name + ": " + i.types
+            d += "\n\n"
+        return d
+
+    res = ""
+    for i in d:
+        res += api_to_block(i)
+        res += "\n\n"
+    return HttpResponse(res, content_type="text/plain")
+
+
 def delete_api(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         post = json.loads(str(request.body, encoding="utf-8"))
