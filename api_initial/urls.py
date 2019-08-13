@@ -28,5 +28,5 @@ urlpatterns = [
     path("change/", change_api),
     path("delete/", delete_api),
     path("", index),
-    path("data.mp", output_apis)
+    path("data.md", output_apis)
 ]
